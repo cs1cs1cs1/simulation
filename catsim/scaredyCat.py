@@ -5,8 +5,8 @@ import math
 
 # Initialize world
 name = "Scaredy Cat!"
-width = 360
-height = 360
+width = 1000
+height = 1000
 rw.newDisplay(width, height, name)
 
 # Display the state by drawing a cat at that x coordinate
@@ -14,7 +14,7 @@ myimage = dw.loadImage("cat.bmp")
 
 def updateDisplay(state):
     dw.fill(dw.red)
-    dw.draw(myimage, (state[0], math.sin(math.radians(state[0]))))
+    dw.draw(myimage, (state[0], math.sin(math.radians(state[0]))*100 + height/2))
 
 def updateState(state):
      return((state[0] + 1 ,state[1], state[2], state[3]))
@@ -53,7 +53,7 @@ def handleEvent(state, event):
 # World state will be single x coordinate at left edge of world
 
 # The cat starts at the left, moving right 
-initState = (0,1,1,1)
+initState = (0,100,1,1)
 
 # Run the simulation no faster than 60 frames per second
 frameRate = 60
