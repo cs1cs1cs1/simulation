@@ -17,7 +17,7 @@ def updateDisplay(state):
     dw.draw(myimage, (state[0], math.sin(math.radians(state[0]))))
 
 def updateState(state):
-     return((state[0] + 1 ,state[1]))
+     return((state[0] + 1 ,state[1], state[2], state[3]))
 
 # Terminate the simulation when the x coord reaches the screen edge,
 # that is, when pos is less then zero or greater than the screen width
@@ -46,14 +46,14 @@ def handleEvent(state, event):
             newState = -1
         else:
             newState = 1   
-        return(state[0], state[1])
+        return(state[0], state[1], state[2], state[3])
     else:
         return(state)
 
 # World state will be single x coordinate at left edge of world
 
 # The cat starts at the left, moving right 
-initState = (0,1)
+initState = (0,1,1,1)
 
 # Run the simulation no faster than 60 frames per second
 frameRate = 60
