@@ -13,11 +13,12 @@ rw.newDisplay(width, height, name)
 myimage = dw.loadImage("cat.bmp")
 
 def updateDisplay(state):
-    dw.fill(dw.red)
+    mycolor = (state[4], state[5], state[6]);
+    dw.fill(mycolor)
     dw.draw(myimage, (state[0], math.sin(math.radians(state[0]))*100 + height/3))
 
 def updateState(state):
-     return((state[0] + state[2],state[1], state[2], state[3]))
+     return((state[0] + state[2],state[1], state[2], state[3], state[4], state[5], state[6]))
 
 # Terminate the simulation when the x coord reaches the screen edge,
 # that is, when pos is less then zero or greater than the screen width
@@ -44,16 +45,24 @@ def handleEvent(state, event):
     if (event.type == pg.MOUSEBUTTONDOWN):
         if (state[2]) == 1:
             newState = -1
+            newR = 255;
+            newG = 0;
+            newB = 0;
+            return(state[0], state[1], newState, state[3], newR, newG, newB);
         else:
-            newState = 1   
-        return(state[0], state[1], newState, state[3])
+            newR = 0;
+            newG = 255;
+            newB = 0;
+            newState = 1
+            return(state[0], state[1], newState, state[3], newR, newG, newB);
+   
     else:
         return(state)
 
 # World state will be single x coordinate at left edge of world
 
 # The cat starts at the left, moving right 
-initState = (0,100,1,1)
+initState = (0,100,1,1, 125, 125, 125)
 
 # Run the simulation no faster than 60 frames per second
 frameRate = 60
