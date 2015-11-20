@@ -2,6 +2,7 @@ import runWorld as rw
 import drawWorld as dw
 import pygame as pg
 import math
+from random import randint
 
 # Initialize world
 name = "Scaredy Cat!"
@@ -45,14 +46,14 @@ def handleEvent(state, event):
     if (event.type == pg.MOUSEBUTTONDOWN):
         if (state[2]) == 1:
             newState = -1
-            newR = 255;
-            newG = 0;
-            newB = 0;
+            newR = randint(0,255);
+            newG = randint(0,255);
+            newB = randint(0,255);
             return(state[0], state[1], newState, state[3], newR, newG, newB);
         else:
-            newR = 0;
-            newG = 255;
-            newB = 0;
+            newR = randint(0,255);
+            newG = randint(0,255);
+            newB = randint(0,255);
             newState = 1
             return(state[0], state[1], newState, state[3], newR, newG, newB);
    
