@@ -14,10 +14,10 @@ myimage = dw.loadImage("cat.bmp")
 
 def updateDisplay(state):
     dw.fill(dw.red)
-    dw.draw(myimage, (state[0], math.sin(math.radians(state[0]))*100 + height/2))
+    dw.draw(myimage, (state[0], math.sin(math.radians(state[0]))*100 + height/3))
 
 def updateState(state):
-     return((state[0] + 1 ,state[1], state[2], state[3]))
+     return((state[0] + state[2],state[1], state[2], state[3]))
 
 # Terminate the simulation when the x coord reaches the screen edge,
 # that is, when pos is less then zero or greater than the screen width
@@ -42,11 +42,11 @@ def endState(state):
 def handleEvent(state, event):  
 #    print("Handling event: " + str(event))
     if (event.type == pg.MOUSEBUTTONDOWN):
-        if (state[1]) == 1:
+        if (state[2]) == 1:
             newState = -1
         else:
             newState = 1   
-        return(state[0], state[1], state[2], state[3])
+        return(state[0], state[1], newState, state[3])
     else:
         return(state)
 
