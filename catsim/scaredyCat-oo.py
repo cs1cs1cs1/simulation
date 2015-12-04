@@ -15,16 +15,14 @@ myimage = dw.loadImage("cat.bmp")
 
 class State:
     endState = False
-    def updateState(self, x, xv, r, g, b):
-        State.x = x
-        State.xv = xv
-        State.r = r
-        State.g = g
-        State.b = b
-        State.x = State.x + State.xv
-        return((State.x, State.xv, State.r, State.g, State.b))
+    def setState(self, x, xv, r, g, b):
+        self.x = x
+        self.xv = xv
+        self.r = r
+        self.g = g
+        self.b = b
     def __init__(self, x, xv, r, g, b):
-        self.updateState(x, xv, r, g, b)
+        self.setState(x, xv, r, g, b)
 
 ooInitState = State(0, 1, 125, 125, 125)
 
@@ -33,9 +31,10 @@ def updateDisplay(state):
     dw.fill(mycolor)
     dw.draw(myimage, (state.x, math.sin(math.radians(state.x))*100 + height/3))
 
-''''def updateState(state):
-     return((state.x + state.xv, state[2], state[3], state[4], state[5], state[6]))'''
-
+def updateState(state):
+   # state.x = state.x + state.xv
+    return State(state.x + state.xv, state.xv, state.r, state.g, state.b)
+#    return((state.x, state.xv, state.r, state.g, state.b))
 # Terminate the simulation when the x coord reaches the screen edge,
 # that is, when pos is less then zero or greater than the screen width
 # state -> bool
@@ -64,13 +63,13 @@ def handleEvent(state, event):
             newR = randint(0,255);
             newG = randint(0,255);
             newB = randint(0,255);
-            return(state.x, newState, newR, newG, newB);
+            return State(state.x, newState, newR, newG, newB);
         else:
             newR = randint(0,255);
             newG = randint(0,255);
             newB = randint(0,255);
             newState = 1
-            return(state.x, newState, newR, newG, newB);
+            return State(state.x, newState, newR, newG, newB);
    
     else:
         return(state)
@@ -84,4 +83,4 @@ def handleEvent(state, event):
 frameRate = 60
 
 # Run the simulation!
-rw.runWorld(ooInitState, updateState, updateDisplay, handleEvent, endState, frameRate)
+rw.runWorld(State(0,1,125,125,125), updateDisplay, updateState, handleEvent, endState, frameRate)
