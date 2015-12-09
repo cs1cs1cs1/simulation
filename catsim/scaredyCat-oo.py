@@ -15,14 +15,12 @@ myimage = dw.loadImage("cat.bmp")
 
 class State:
     endState = False
-    def setState(self, x, xv, r, g, b):
+    def __init__(self, x, xv, r, g, b):
         self.x = x
         self.xv = xv
         self.r = r
         self.g = g
         self.b = b
-    def __init__(self, x, xv, r, g, b):
-        self.setState(x, xv, r, g, b)
 
 ooInitState = State(0, 1, 125, 125, 125)
 
